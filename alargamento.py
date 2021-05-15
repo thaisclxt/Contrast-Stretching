@@ -8,23 +8,17 @@ def contrast_stretching(row, column):
     for x in range(row):
         for y in range(column):
             image[x][y] = int(input())
-            print("image[{0}][{1}] = {2}".format(x, y, image[x][y]))
-
-    print(image)
     
     a = np.array(image).flatten()
     smaller_image_value = min(a)
     larger_image_value = max(a)
 
-    print(image)
-
-    new_image = [[0] * row] * column
+    new_image = np.zeros((row, column))
     for x in range(row):
         for y in range(column):
-            print("image[{0}][{1}] = {2}".format(x, y, image[x][y]))
-            print("({0} - {1}) * (({2} - {3}) / ({4} - {1}) + {3}) ".format(image[x][y], smaller_image_value, larger_range_value, smaller_range_value, larger_image_value))
             new_image[x][y] = (image[x][y] - smaller_image_value) * ((larger_range_value - smaller_range_value) / (larger_image_value - smaller_image_value)) + smaller_range_value
-
+            print("({0} - {1}) * (({2} - {3}) / ({4} - {1})) + {3} = {5}".format(image[x][y], smaller_image_value, larger_range_value, smaller_range_value, larger_image_value, new_image[x][y]))
+            
     print(new_image)
 
 row = int(input("Entre com a quantidade de linhas: "))
