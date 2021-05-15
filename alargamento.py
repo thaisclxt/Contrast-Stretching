@@ -13,11 +13,10 @@ def contrast_stretching(row, column):
     smaller_image_value = min(a)
     larger_image_value = max(a)
 
-    new_image = np.zeros((row, column))
+    new_image = np.zeros((row, column), dtype=int)
     for x in range(row):
         for y in range(column):
-            new_image[x][y] = (image[x][y] - smaller_image_value) * ((larger_range_value - smaller_range_value) / (larger_image_value - smaller_image_value)) + smaller_range_value
-            print("({0} - {1}) * (({2} - {3}) / ({4} - {1})) + {3} = {5}".format(image[x][y], smaller_image_value, larger_range_value, smaller_range_value, larger_image_value, new_image[x][y]))
+            new_image[x][y] = round((image[x][y] - smaller_image_value) * ((larger_range_value - smaller_range_value) / (larger_image_value - smaller_image_value)) + smaller_range_value)
             
     print(new_image)
 
