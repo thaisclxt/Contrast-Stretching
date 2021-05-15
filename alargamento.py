@@ -4,7 +4,7 @@ def contrast_stretching(row, column):
     smaller_range_value = 0
     larger_range_value = 7
 
-    image = [[0] * row] * column
+    image = np.zeros((row, column), dtype=int)
     for x in range(row):
         for y in range(column):
             image[x][y] = int(input())
