@@ -8,7 +8,7 @@ def contrast_stretching(row, column):
     for x in range(row):
         for y in range(column):
             image[x][y] = int(input())
-            print("image[{0}][{1}] = {2}", x, y, image[x][y])
+            print("image[{0}][{1}] = {2}".format(x, y, image[x][y]))
 
     a = np.array(image).flatten()
     smaller_image_value = min(a)
