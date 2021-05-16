@@ -1,26 +1,37 @@
 import numpy as np
 
-def set_pixels(row, column) -> 'np.ndarray':
-    image = np.zeros((row, column), dtype=int)
-    for x in range(row):
-        for y in range(column):
-            image[x][y] = int(input())
+class Image:
     
-    return image
+    def __init__(self, row: int, column: int, smaller_range_value: int, larger_range_value: int) -> None:
+        self.row = row
+        self.column = column
+        self.a = smaller_range_value
+        self.b = larger_range_value
 
-def get_max_and_min(image) -> int:
-    a = np.array(image).flatten()
-    return min(a), max(a)
+        self.image = self.set_pixels()
+        self.c, self.d = self.get_max_and_min()
 
-def contrast_stretching(image, row, column, smaller_range_value, larger_range_value) -> None:
-    smaller_image_value, larger_image_value = get_max_and_min(image)
+    def set_pixels(self) -> 'np.ndarray':
+        image = np.zeros((self.row, self.column), dtype=int)
 
-    new_image = np.zeros((row, column), dtype=int)
-    for x in range(row):
-        for y in range(column):
-            new_image[x][y] = round((image[x][y] - smaller_image_value) * ((larger_range_value - smaller_range_value) / (larger_image_value - smaller_image_value)) + smaller_range_value)
-            
-    print(new_image)
+        for x in range(self.row):
+            for y in range(self.column):
+                image[x][y] = int(input())
+
+        return image
+
+    def get_max_and_min(self) -> int:
+        f = np.array(self.image).flatten()
+        return min(f), max(f)
+
+    def contrast_stretching(self) -> None:
+        new_image = np.zeros((self.row, self.column), dtype=int)
+
+        for x in range(self.row):
+            for y in range(self.column):
+                new_image[x][y] = round((self.image[x][y] - self.c) * ((self.b - self.a) / (self.d - self.c)) + self.a)
+                
+        print(new_image)
 
 def main() -> None:
     row = int(input("Entre com a quantidade de linhas: "))
@@ -28,9 +39,8 @@ def main() -> None:
     smaller_range_value = int(input("Entre com o menor valor da faixa: "))
     larger_range_value = int(input("Entre com o maior valor da faixa: "))
 
-    image = set_pixels(row, column)
-
-    contrast_stretching(image, row, column, smaller_range_value, larger_range_value)
+    image = Image(row, column, smaller_range_value, larger_range_value)
+    image.contrast_stretching()
 
 if __name__ == "__main__":
     main()
