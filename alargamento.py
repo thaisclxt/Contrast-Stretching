@@ -1,15 +1,18 @@
 import numpy as np
 
-def get_max_and_min(image) -> int:
-    a = np.array(image).flatten()
-    return min(a), max(a)
-
-def contrast_stretching(row, column, smaller_range_value, larger_range_value) -> None:
+def set_pixels(row, column) -> 'np.ndarray':
     image = np.zeros((row, column), dtype=int)
     for x in range(row):
         for y in range(column):
             image[x][y] = int(input())
+    
+    return image
 
+def get_max_and_min(image) -> int:
+    a = np.array(image).flatten()
+    return min(a), max(a)
+
+def contrast_stretching(image, row, column, smaller_range_value, larger_range_value) -> None:
     smaller_image_value, larger_image_value = get_max_and_min(image)
 
     new_image = np.zeros((row, column), dtype=int)
@@ -25,7 +28,9 @@ def main() -> None:
     smaller_range_value = int(input("Entre com o menor valor da faixa: "))
     larger_range_value = int(input("Entre com o maior valor da faixa: "))
 
-    contrast_stretching(row, column, smaller_range_value, larger_range_value)
+    image = set_pixels(row, column)
+
+    contrast_stretching(image, row, column, smaller_range_value, larger_range_value)
 
 if __name__ == "__main__":
     main()
