@@ -1,9 +1,6 @@
 import numpy as np
 
-def contrast_stretching(row, column):
-    smaller_range_value = 0
-    larger_range_value = 7
-
+def contrast_stretching(row, column, smaller_range_value, larger_range_value) -> None:
     image = np.zeros((row, column), dtype=int)
     for x in range(row):
         for y in range(column):
@@ -20,7 +17,13 @@ def contrast_stretching(row, column):
             
     print(new_image)
 
-row = int(input("Entre com a quantidade de linhas: "))
-column = int(input("Entre com a quantidade de colunas: "))
+def main() -> None:
+    row = int(input("Entre com a quantidade de linhas: "))
+    column = int(input("Entre com a quantidade de colunas: "))
+    smaller_range_value = int(input("Entre com o menor valor da faixa: "))
+    larger_range_value = int(input("Entre com o maior valor da faixa: "))
 
-contrast_stretching(row, column)
+    contrast_stretching(row, column, smaller_range_value, larger_range_value)
+
+if __name__ == "__main__":
+    main()
